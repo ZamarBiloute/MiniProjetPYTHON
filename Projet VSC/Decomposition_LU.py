@@ -23,7 +23,7 @@ def Construction_Matrices_L_U(MatriceA, Matriceb, Taille):
     for Indice in range(0,Taille,1):
         pivot = MatriceU[Indice][Indice]
         if pivot == 0:
-            print("Le pivot est nul, la décomposition LU n'est pas possible !")
+            print("Le pivot est nul en U[" + str(Indice + 1) + "][" + str(Indice + 1) + "], la décomposition LU n'est pas possible !")
             return False
         for Ligne in range(Indice+1,Taille,1):
             coeffcient = MatriceU[Ligne][Indice]/pivot
@@ -31,13 +31,15 @@ def Construction_Matrices_L_U(MatriceA, Matriceb, Taille):
                 MatriceU[Ligne][Colonne] = MatriceU[Ligne][Colonne] - (coeffcient*MatriceU[Indice][Colonne])
             MatriceL[Ligne][Indice] = coeffcient
     
-    for i in range(0,Taille,1):
-        for j in range(0,Taille,1):
-            print("U[" + str(i + 1) + "][" + str(j + 1) + "] = " + str(MatriceU[i][j]))
-    for i in range(0,Taille,1):
-        for j in range(0,Taille,1):
-            print("L[" + str(i + 1) + "][" + str(j + 1) + "] = " + str(MatriceL[i][j]))
-
+    for Ligne in range(0,Taille,1):
+        for Colonne in range(0,Taille,1):
+            print("U[" + str(Ligne + 1) + "][" + str(Colonne + 1) + "] = " + str(MatriceU[Ligne][Colonne]), end=" ")
+        print("\r")
+    for Ligne in range(0,Taille,1):
+        for Colonne in range(0,Taille,1):
+            print("L[" + str(Ligne + 1) + "][" + str(Colonne + 1) + "] = " + str(MatriceL[Ligne][Colonne]), end=" ")
+        print("\r")
+ 
     return True
 
 def Construction_Matrice_y(MatriceL, Matriceb, Taille):
@@ -76,10 +78,9 @@ def Construction_Matrice_x(MatriceU, Matricey, Taille):
             print("Erreur : Matrice de U nul détécté a MatriceU[" + str(Ligne + 1) + "][" + str(Ligne + 1) + "]")
             return False 
         Matricex[Ligne] = Matricex[Ligne]/MatriceU[Ligne][Ligne]
-
     
-    for i in range(0,Taille,1):
-        print("X[" + str(i + 1) + "] = " + str(Matricex[i]))
+    # for i in range(0,Taille,1):
+    #     print("X[" + str(i + 1) + "] = " + str(Matricex[i]))
 
     return True
 
@@ -101,27 +102,27 @@ def main():
             MatriceA[Ligne][Colonne] = float(input("Entrer l'element A[" + str(Ligne + 1) +"][" + str(Colonne + 1) + "] : "))
         Matriceb[Ligne] = float(input("Entrer l'element B[" + str(Ligne + 1) + "] : "))
 
-    for i in range(0,Taille,1):
-        for j in range(0,Taille,1):
-            print("A[" + str(i + 1) + "][" + str(j + 1) + "] = " + str(MatriceA[i][j]))
-    for i in range(0,Taille,1):
-            print("b[" + str(i + 1) + "] = " + str(Matriceb[i]))
+    # for i in range(0,Taille,1):
+    #     for j in range(0,Taille,1):
+    #         print("A[" + str(i + 1) + "][" + str(j + 1) + "] = " + str(MatriceA[i][j]))
+    # for i in range(0,Taille,1):
+    #         print("b[" + str(i + 1) + "] = " + str(Matriceb[i]))
 
     if(Construction_Matrices_L_U(MatriceA, Matriceb, Taille) == False):
-        print ("La décomposition LU n'est pas possible !")
+        print ("Erreur lors de la construction des matrices L et U !")
         return 
     
     if(Construction_Matrice_y(MatriceL, Matriceb, Taille) == False):
-        print ("La construction de la matrice y n'est pas possible !")
+        print ("Erreur lors de la construction de la matrice y !")
         return
     
     if(Construction_Matrice_x(MatriceU, Matricey, Taille) == False):
-        print ("La construction de la matrice x n'est pas possible !")
+        print ("Erreur lors de la construction de la matrice x !")
         return
     
     print("Voici les solutions du système linéaire : ")
     for i in range(0,Taille,1):
-        print("x[" + str(i + 1) + "] = " + str(Matricex[i]))
+        print("X[" + str(i + 1) + "] = " + str(Matricex[i]))
     
 if __name__ == "__main__":
     main()
