@@ -58,8 +58,8 @@ def Construction_Matrice_y(MatriceL, Matriceb, Taille):
             return False
         Matricey[Ligne] = Matricey[Ligne]/MatriceL[Ligne][Ligne]
     
-    for i in range(0,Taille,1):
-        print("Y[" + str(i + 1) + "] = " + str(Matricey[i]))
+    for Ligne in range(0,Taille,1):
+        print("Y[" + str(Ligne + 1) + "] = " + str(Matricey[Ligne]))
 
     return True 
     
@@ -79,8 +79,8 @@ def Construction_Matrice_x(MatriceU, Matricey, Taille):
             return False 
         Matricex[Ligne] = Matricex[Ligne]/MatriceU[Ligne][Ligne]
     
-    # for i in range(0,Taille,1):
-    #     print("X[" + str(i + 1) + "] = " + str(Matricex[i]))
+    # for Ligne in range(0,Taille,1):
+    #     print("X[" + str(Ligne + 1) + "] = " + str(Matricex[Ligne]))
 
     return True
 
@@ -121,8 +121,8 @@ def main():
         return
     
     print("Voici les solutions du système linéaire : ")
-    for i in range(0,Taille,1):
-        print("X[" + str(i + 1) + "] = " + str(Matricex[i]))
+    for Ligne in range(0,Taille,1):
+        print("X[" + str(Ligne + 1) + "] = " + str(Matricex[Ligne]))
     
 if __name__ == "__main__":
     main()
