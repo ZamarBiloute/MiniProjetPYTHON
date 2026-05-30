@@ -2,16 +2,18 @@
 # Importation de la bibliothèque numpy pour la manipulation des matrices
 import numpy as np
 
-TAILLE_TABLEAU = 150
-
-
 def Construction_Matrices_L_U(MatriceA, Matriceb, Taille):
     
     global MatriceL, MatriceU
 
     #Définition  des matrices L et U
-    MatriceL = np.zeros((Taille, Taille))
-    MatriceU = np.zeros((Taille, Taille))
+    # MatriceL = np.zeros((Taille, Taille))
+    # MatriceU = np.zeros((Taille, Taille))
+    MatriceL = []
+    MatriceU = []
+    for Ligne in range(0,Taille,1):
+        MatriceL.append([0]*Taille)
+        MatriceU.append([0]*Taille)
 
     #Initialisation de la matrice L et U
     for Ligne in range(0,Taille,1):
@@ -88,13 +90,17 @@ def main():
     # saisie de la taille des matrice de ce code
     Taille = int(input("Entrer la taille de la matrice A : "))
     
-    while Taille > TAILLE_TABLEAU or Taille <= 0 or Taille != int(Taille):
-        print("La taille doit être un entier positif inférieur ou égal à " + str(TAILLE_TABLEAU) + " !")
+    while  Taille <= 0 or Taille != int(Taille):
+        print("La taille doit être superieur à 0 et un entier")
         Taille = int(input("Entrer la taille de la matrice A : "))
     
     # initialisation des matrices A et b
-    MatriceA = np.zeros((Taille, Taille))
+    MatriceA = []
+    for Ligne in range(0,Taille,1):
+        MatriceA.append([0]*Taille)
     Matriceb = [0]*Taille
+    # MatriceA = np.zeros((Taille, Taille))
+    # Matriceb = [0]*Taille
     
     #Saisie des éléments de la matrice A et b
     for Ligne in range(0,Taille,1):
